@@ -1,153 +1,160 @@
 <html>
-	<head>
+
+<head>
 	<meta charset="utf-8">
 	<link rel="calendar.html">
-	 <script>
-	function debugLog(...params) {
-		console.debug(...params);
-	}
+	<script>
+		function debugLog(...params) {
+			console.debug(...params);
+		}
 
-        var pocitadlo=0;
-        var prirustekVydelku = 1;
-	function prictiJedna(vstup) {
-		return vstup + 1;
-	}
-	function zvysPocitadlo() {
-		debugLog("zvysPocitadlo, pocitadlo pred: ", pocitadlo);
-		pocitadlo = pocitadlo + prirustekVydelku;
-	}
-        function shop() {
-		document.getElementById("shop").style.visibility = "visible"
-		setTimeout(shop2,10000)
-	}   
-        function shop2() {
-		document.getElementById("shop").style.visibility = "hidden";
+		var pocitadlo = 0;
+		var prirustekVydelku = 1;
+		function prictiJedna(vstup) {
+			return vstup + 1;
+		}
+		function zvysPocitadlo() {
+			debugLog("zvysPocitadlo, pocitadlo pred: ", pocitadlo);
+			pocitadlo = pocitadlo + prirustekVydelku;
+		}
+		function shop() {
+			document.getElementById("shop").style.visibility = "visible"
+			setTimeout(shop2, 10000)
+		}
+		function shop2() {
+			document.getElementById("shop").style.visibility = "hidden";
 
-	}
-	function vypisPocitadlo() {
-		document.getElementById("generovanyobsah").innerText = "Coins earned: "  + pocitadlo;
-		document.getElementById("kupovani").disabled = pocitadlo < 10;
-	}
-	function tlacitkoStlaceno () {
-		debugLog("tlacitkoStlaceno() ...");
-		zvysPocitadlo();
-		vypisPocitadlo();
-	}
-	function prirustekZmenen(ev) {
-		var hodnota = parseInt(ev.target.value);
-		prirustekVydelku = isNaN(hodnota) ? prirustekVydelku : hodnota;
-		upravTlacitko();
-		console.log("prirustekZmenen: ", prirustekVydelku);
-	}
-        function zobraztlacitkokup() { 
-        	document.getElementById("kupovani").style.visibility = "visible";
-	}
-        function schovejtlacitkokup() {
-	 document.getElementById("kupovani").style.visibility = "hidden";
-	}
-	function ztratVsechno() {
-		pocitadlo = 0;
-		vypisPocitadlo();
-		muhehe();
-	}
-	function kupVydelavani() {
-			if (pocitadlo >=10) {
-			pocitadlo = pocitadlo - 10;			
-			prirustekVydelku = prirustekVydelku + 1;
-			upravTlacitko();
+		}
+		function vypisPocitadlo() {
+			document.getElementById("generovanyobsah").innerText = "Coins earned: " + pocitadlo;
+			document.getElementById("kupovani").disabled = pocitadlo < 10;
+		}
+		function tlacitkoStlaceno() {
+			debugLog("tlacitkoStlaceno() ...");
+			zvysPocitadlo();
 			vypisPocitadlo();
 		}
-	}
-	function muhehe() {
-		document.getElementById("muhehe").style.visibility = "visible";
-		document.getElementById("main").style.visibility = "hidden";
-		shop2();
-			setTimeout(zobrazMain, 1500);
-	}
-	function zobrazMain() {
-		document.getElementById("muhehe").style.visibility = "hidden";
-		document.getElementById("main").style.visibility = "visible";
-	}
-	function start() {
-		document.getElementById("earn1coin").onclick = tlacitkoStlaceno;
-		document.getElementById("vydelek").onchange = prirustekZmenen;
-		document.getElementById("vydelek").value = 1;
-		document.getElementById("loose-everything").onclick = ztratVsechno;
-		upravTlacitko();
-                document.getElementById("shop-button").onclick = shop;
-		odlozProhozeni();
-                document.getElementById("kupovani").onclick = kupVydelavani;
-		vypisPocitadlo();
-	}
-	function odlozProhozeni() {
-		const delay = Math.random(5) * 1000;
-		setTimeout(prohod, 1000 + delay);
-	}
-	function prohod() {
-		const fl = document.getElementById("shop-button").style.float;
-		if (fl === 'left') {
-			document.getElementById("shop-button").style.float = 'unset';
-		} else {
-			document.getElementById("shop-button").style.float = 'left';
+		function prirustekZmenen(ev) {
+			var hodnota = parseInt(ev.target.value);
+			prirustekVydelku = isNaN(hodnota) ? prirustekVydelku : hodnota;
+			upravTlacitko();
+			console.log("prirustekZmenen: ", prirustekVydelku);
 		}
-		odlozProhozeni();
-	}
-	function upravTlacitko() {
-		document.getElementById("pocetminci").innerText = prirustekVydelku;
-	}
-	window.onload = start;
+		function zobraztlacitkokup() {
+			document.getElementById("kupovani").style.visibility = "visible";
+		}
+		function schovejtlacitkokup() {
+			document.getElementById("kupovani").style.visibility = "hidden";
+		}
+		function ztratVsechno() {
+			pocitadlo = 0;
+			vypisPocitadlo();
+			muhehe();
+		}
+		function kupVydelavani() {
+			if (pocitadlo >= 10) {
+				pocitadlo = pocitadlo - 10;
+				prirustekVydelku = prirustekVydelku + 1;
+				upravTlacitko();
+				vypisPocitadlo();
+			}
+		}
+		function muhehe() {
+			document.getElementById("muhehe").style.visibility = "visible";
+			document.getElementById("main").style.visibility = "hidden";
+			shop2();
+			setTimeout(zobrazMain, 1500);
+		}
+		function zobrazMain() {
+			document.getElementById("muhehe").style.visibility = "hidden";
+			document.getElementById("main").style.visibility = "visible";
+		}
+		function start() {
+			document.getElementById("earn1coin").onclick = tlacitkoStlaceno;
+			document.getElementById("vydelek").onchange = prirustekZmenen;
+			document.getElementById("vydelek").value = 1;
+			document.getElementById("loose-everything").onclick = ztratVsechno;
+			upravTlacitko();
+			document.getElementById("shop-button").onclick = shop;
+			odlozProhozeni();
+			document.getElementById("kupovani").onclick = kupVydelavani;
+			vypisPocitadlo();
+		}
+		function odlozProhozeni() {
+			const delay = Math.random(5) * 1000;
+			setTimeout(prohod, 1000 + delay);
+		}
+		function prohod() {
+			const fl = document.getElementById("shop-button").style.float;
+			if (fl === 'left') {
+				document.getElementById("shop-button").style.float = 'unset';
+			} else {
+				document.getElementById("shop-button").style.float = 'left';
+			}
+			odlozProhozeni();
+		}
+		function upravTlacitko() {
+			document.getElementById("pocetminci").innerText = prirustekVydelku;
+		}
+		window.onload = start;
 	</script>
-	</head>
-                        
-				<body bgcolor="#0000ff">
-	<div id="main"> 
-			<h1>Coin Earner 20.12.4</h1>
+</head>
+
+<body bgcolor="#0000ff">
+	<div id="main">
+		<h1>Coin Earner 20.12.4</h1>
 		<p id="shop" style="visibility: hidden">
-			 Výdělek: <input id="vydelek" type="number" min="1" max="999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" value="1"/>
-         	</p>
-		<p> 
-		<button style="bgcolor=#000000" id="earn1coin">Earn <div id="pocetminci">1</div> coin(s)</button>
+			Výdělek: <input id="vydelek" type="number" min="1"
+				max="999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
+				value="1" />
+		</p>
+		<p>
+			<button style="bgcolor=#000000" id="earn1coin">Earn <div id="pocetminci">1</div> coin(s)</button>
 		</p>
 		<div id="generovanyobsah">Coins earned: 0</div>
 		<button id="loose-everything">Loose everything</button>
-                <button id="shop-button" style="margin-right: 5px;">Shop</button>
+		<button id="shop-button" style="margin-right: 5px;">Shop</button>
 	</div>
 	<div id="muhehe" style="visibility: hidden; background-color: #00ff00">
-		<center><font size=60>MuHeHe</font><p>All coins are mine!</p></center>
+		<center>
+			<font size=60>MuHeHe</font>
+			<p>All coins are mine!</p>
+		</center>
 	</div>
 
-	<a href="http://www.herozerogame.com/?lang=cs_CZ&ref=020-030-000-230&subid=C01_A001%26P%3D%26K%3Dhero%20zero">odkaz na hero zero</a>
-			<br/>
+	<a href="http://www.herozerogame.com/?lang=cs_CZ&ref=020-030-000-230&subid=C01_A001%26P%3D%26K%3Dhero%20zero">odkaz
+		na hero zero</a>
+	<br />
 	<a href="https://en.aptoide.com/">odkaz na stažení minecraftu za free</a>
-         
-	 <div style="background-image: url('o.jpg');"> 
 
+	<div style="background-image: url('o.jpg');">
+		<br />
+		<button id="kupovaani">kup +1 k vydělávání</button>
+		<br />
+		tak a užijte si spustu zábavy Super Mato;)
 
-        <br/>
-	<button id="kupovani">kup +1 k vydělávání</button> 
-	<br/>
-	tak a užijte si spustu zábavy Super Mato;)
-	 
-         <br/>
-        
-	<a href="https://tankionline.com/battle-en.html#/battle=2aaaaaba5a404a36">odkaz na tanki online</a><br/> A u toho tanki chybu nemám:)
-		<br/>
+		<br />
+
+		<a href="https://tankionline.com/battle-en.html#/battle=2aaaaaba5a404a36">odkaz na tanki online</a><br /> A u
+		toho tanki chybu nemám:)
+		<br />
 		<button>coin earner version 20.12.4</button>
-			    <br/>
-			    <br/>
-			    <br/>
-			    <br/>
-			    <br/>
-	
-                CHANGE LOG (20.12.4)
-		     <br/>
-		    -nové číslování verzí
-                    <br/>
-		    -opravené tlačítko pro přičítání peněz
-		    <br/>
-		    -nový background color pto tuto verzi
-		    <br/>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
 
+		CHANGE LOG (20.12.4)
+		<br />
+		-nové číslování verzí
+		<br />
+		-opravené tlačítko pro přičítání peněz
+		<br />
+		-nový background color pto tuto verzi
+		<br />
+		<button>gotcha! </button>
 
-	</body>
+</body>
+
 </html>
